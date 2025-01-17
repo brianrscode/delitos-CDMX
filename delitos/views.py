@@ -63,7 +63,17 @@ def home(request):
         "Cantidad de delitos por mes"
     )
 
-    return render(request, "delitos/delitos_por_alcaldia.html", {"fig2": fig_delitos_alcaldia, "fig3": fig_delitos_mes})
+    # df_cantidad_delitos = df.groupby("delito")["delito"].count().reset_index(name="count").sort_values("count", ascending=False)
+    df_cantidad_delitos = agrupar_datos(df, "delito").sort_values("count", ascending=False).head(10)
+    fig_cantidad_delitos = generar_grafico_barras(
+        df_cantidad_delitos,
+        "delito",
+        "count",
+        "count",
+        "10 Delitos más comunes en CDMX"
+    )
+
+    return render(request, "delitos/delitos_por_alcaldia.html", {"fig2": fig_delitos_alcaldia, "fig3": fig_delitos_mes, "fig4": fig_cantidad_delitos})
 
 
 
@@ -121,10 +131,13 @@ def mapa(request):
         lat=df_puntos["latitud"],
         lon=df_puntos["longitud"],
         color="delito_count",
+        size="delito_count",
         template="plotly_dark",
         zoom=11,
         height=600,
         mapbox_style="open-street-map",
+        color_continuous_scale=px.colors.diverging.Portland,
+        size_max=7
     )
     fig_mapa.update_layout(
         margin={"r": 0, "t": 0, "l": 0, "b": 0},
