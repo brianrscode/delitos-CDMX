@@ -1,0 +1,63 @@
+#!/bin/sh
+
+VENV_DIR="venv"
+
+# Verificar si el entorno virtual ya existe
+if [ ! -d "$VENV_DIR" ]; then
+    # Crear entorno virtual
+    echo "Creando entorno virtual..."
+    python -m venv $VENV_DIR
+    echo "Entorno virtual creado en $VENV_DIR"
+fi
+
+# Activar entorno virtual
+if [ -f "$VENV_DIR/Scripts/activate" ]; then
+    echo "Activando entorno virtual..."
+    source $VENV_DIR/Scripts/activate
+    echo "Entorno virtual activado"
+
+elif [ -f "$VENV_DIR/bin/activate" ]; then
+    echo "Activando entorno virtual..."
+    source $VENV_DIR/bin/activate
+    echo "Entorno virtual activado"
+else
+    echo "No se pudo activar el entorno virtual. Ruta desconocida."
+    exit 1
+fi
+
+# Actualizar pip
+echo "Actualizando pip..."
+python.exe -m pip install --upgrade pip
+echo "pip actualizado en el entorno virtual"
+
+# Si existe un parámetro con el valor 'v', instalar solo lo necesario para visión por computadora
+if [ "$1" = "v" ]; then
+    echo "Instalando dependencias..."
+    pip install opencv-contrib-python
+    echo "Dependencias instaladas en el entorno virtual"
+    echo "Creando archivo requirements.txt..."
+    pip freeze > requirements.txt
+    echo "Archivo requirements.txt creado"
+elif [ "$1" = "vt" ]; then  # vt = visión por computadora + otras dependencias útiles
+    echo "Instalando dependencias..."
+    pip install opencv-contrib-python
+    pip install matplotlib
+    pip install imutils
+    echo "Dependencias instaladas en el entorno virtual"
+    echo "Creando archivo requirements.txt..."
+    pip freeze > requirements.txt
+    echo "Archivo requirements.txt creado"
+elif [ "$1" = "r" ]; then  # r = instala todos los requerimientos de un archivo requirements.txt
+    echo "Instalando dependencias..."
+    pip install -r requirements.txt
+    echo "Dependencias instaladas en el entorno virtual"
+fi
+
+
+# Si existe un parametro, instalar solo esa dependencia
+# if [ $# -gt 0 ]; then
+#     echo "Instalando solo la dependencia $1..."
+#     pip install $1
+#     echo "Dependencia $1 instalada en el entorno virtual"
+#     exit 0
+# fi

@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block title %}
+    Delitos alcaldía
+{% endblock title %}
+
+{% block content %}
+
+    <h1>Delitos por alcaldía</h1>
+    <div>{{ fig2|safe }}</div>
+
+    <br>
+
+    <h1>Delitos por mes</h1>
+    <div>{{ fig3|safe }}</div>
+
+    <br>
+
+
+{% endblock content %}

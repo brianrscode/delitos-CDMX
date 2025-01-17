@@ -1,0 +1,27 @@
+#!/bin/sh
+
+
+VENV_DIR="venv"
+
+# Verificar si el entorno virtual ya existe
+if [ ! -d "$VENV_DIR" ]; then
+    # Crear entorno virtual
+    echo "Creando entorno virtual..."
+    python -m venv $VENV_DIR
+    echo "Entorno virtual creado en $VENV_DIR"
+fi
+
+# Activar entorno virtual
+if [ -f "$VENV_DIR/Scripts/activate" ]; then
+    echo "Activando entorno virtual..."
+    source $VENV_DIR/Scripts/activate
+    echo "Entorno virtual activado"
+
+elif [ -f "$VENV_DIR/bin/activate" ]; then
+    echo "Activando entorno virtual..."
+    source $VENV_DIR/bin/activate
+    echo "Entorno virtual activado"
+else
+    echo "No se pudo activar el entorno virtual. Ruta desconocida."
+    exit 1
+fi

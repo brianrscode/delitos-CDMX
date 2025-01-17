@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+
+{% block title %}Tipo de delito{% endblock title %}
+
+{% block content %}
+    <h1>Tipo de delito</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <select name="lugar" class="form-select" aria-label="Default select example">
+            {% for lugar in lugares %}
+                <option value="{{ lugar }}" {% if lugar == lugar_a_buscar %}selected{% endif %}>{{ lugar }}</option>
+            {% endfor %}
+        </select>
+
+        <br>
+
+        <select name="delito" class="form-select" aria-label="Default select example">
+            {% for delito in delitos %}
+                <option value="{{ delito }}" {% if delito == delito_a_buscar %}selected{% endif %}>{{ delito }}</option>
+                {% comment %} <option value="{{ delito }}" selected>{{ delito }}</option> {% endcomment %}
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    <br>
+
+    <div>{{ fig_delitos|safe }}</div>
+
+{% endblock content %}
