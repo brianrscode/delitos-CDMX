@@ -41,7 +41,30 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 
-## Ejemplo de uso
-<div align="center">
-    <img src="./imgs/delitos.png" width="85%">
-</div>
+## Ejemplos de uso
+<table>
+    <tr>
+        <td>
+            <img src="imgs/home.png" width=800>
+        </td>
+        <td>
+            <img src="imgs/home2.png" width=800>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="imgs/delitos.png" width=800>
+        </td>
+        <td>
+            <img src="imgs/delitos2.png" width=800>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="imgs/mapa.png" width=800>
+        </td>
+        <td>
+            <img src="imgs/mapa2.png" width=800>
+        </td>
+    </tr>
+</table>
